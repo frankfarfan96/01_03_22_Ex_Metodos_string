@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=decive-width,
+initial-scale=1.0">
+<title>Fundamentos JavaScript</title>
+</head>
+
+<body>
+
+<h1>Los primeros 4 Ejercicios basicos</h1>
+
+<script>
+
+/*
+Nota:
+Me conviene repasar la clase 5 cadenas de textos y el n6 templeta string
+Y ademas informarme en  Mdn
+
+---Ejercicios
+
+1) Programa una función que cuente el número de caracteres de una cadena de texto, pe. miFuncion("Hola Mundo") devolverá 10.
+    (La cosa mas importante es hacer las validaciones de los inputs, mas que la funcion principal en si)
+2) Programa una función que te devuelva el texto recortado según el número de caracteres indicados, pe. miFuncion("Hola Mundo", 4) devolverá "Hola".
+
+3) Programa una función que dada una String te devuelva un Array de textos separados por cierto caracter, pe. miFuncion('hola que tal', ' ') devolverá ['hola', 'que', 'tal'].
+
+4) Programa una función que repita un texto X veces, pe. miFuncion('Hola Mundo', 3) devolverá Hola Mundo Hola Mundo Hola Mundo.
+
+Compartir mis soluciones con git o codepen
+*/
+
+//Solucion del problema 1
+//Hecho sin ver documentacion, solo las lineas de codigo de la clase 5 y 6.
+//Cuando busque roslver los problemas que he reportado en la nota de abajo, no pude encontrar la solucion u.u
+function contadorDeCadenaDeTexto (texto = "") {
+
+    contadorDeCadenaDeTexto = texto.length;
+
+    contadorDeCadenaDeTexto != undefined  && (typeof contadorDeCadenaDeTexto !== Array)?
+     (console.log(`El texto tiene ${contadorDeCadenaDeTexto} caracteres`))
+    : (console.log("No ha inserido un texto, has inserido un numero")); 
+}
+
+contadorDeCadenaDeTexto("Hola mundirijillo");
+// NOTA : No logre hacer el caso en el que el input es un Array, y 
+// no se por cual motivo puedo ejecutar mi funcion solo una vez
+// cuando trato de ejecutarla otra vez me dice "TypeError: is not a function"
+
+                       
+console.clear(); /* <--- Borrar/comentar para ejecutar*/
+
+
+//Solucion del problema 2
+
+/* Logica que use para el algoritmo :
+
+a) Con la teoria y con uno de los ejemplos reportado en el metodo split en mdn pude entender
+la logica de recotar el texto según el número de caracteres indicados
+
+b) Oviamente despues el metodo SPLIT te da como output un array de elementes y por ende me informe
+que metodo volvia a unir esos elementos del array
+-Este metodo se revelo JOIN, pues el metodo toString me devolvia el la string pero con cada elemento separado con una coma.
+
+c) Despues implemente la funcion
+ */
+
+//La funcion que corta el texto segun el Numero de caracteres indicado
+ function cortadorDeTexto (miTexto, numeroQueCorta) {
+    let divicion = miTexto.split("", numeroQueCorta);
+    let unionDivicion = divicion.join("");
+    
+    console.log("El texto original es : " + miTexto);
+    console.log("El numero de de caracteres de mostrar son : " +  numeroQueCorta);
+    console.log("El texto recortado es : " + unionDivicion);
+    console.log(" ------ ");
+}
+
+//Variables que representan el texto y el numero de caracteres de console.logear
+let fraseMilenaria = "Muchos son los llamados y pocos los elegidos";
+let numero = 6
+
+//Ejecucion de la funcion
+cortadorDeTexto(fraseMilenaria, numero);
+
+
+console.clear(); /* <--- Borrar/comentar para ejecutar*/
+
+
+//Solucion de problema 3 
+//Empezo como un copy paste de un ejemplo repotado en Mdn, y dsps lo personalize y reescrivi para interiorisarlo mas.
+//La funcion que separa los texto y los vuelve array, segun el tipo de separador que se pida (gracias al metodo SPLIT)
+function separarTextosEnArray(textoOriginal, separador) {
+    let textoVueltoArray = textoOriginal.split(separador);
+    console.log("El texto original es : " + textoOriginal );
+    console.log("El separador es : " + separador);
+    
+    for (let i=0; i < textoVueltoArray.length; i++) {
+        console.log(textoVueltoArray[i] + "  <-  ")
+    }
+   
+    console.log("El array tiene " + textoVueltoArray.length + " elementos");
+    console.log(" -------- ")
+}
+
+//Objetos de tipo String que son representan los textos
+
+let textoFraseMilenaria = "El que quiera llegar a ser grande entre ustedes sera su servidor";
+let diasDeLaSemana = "Lunes, martes, miercoles, viernes, sabado, domingo";
+
+//Variables que representan los separadores
+
+let separadorEspacio = " ";
+let separadorComa = ",";
+
+//Ejecuto la funcione en diversos casos
+
+separarTextosEnArray(textoFraseMilenaria, separadorEspacio);
+separarTextosEnArray(diasDeLaSemana, separadorComa);
+separarTextosEnArray(textoFraseMilenaria);
+
+                       
+console.clear(); /* <--- Borrar/comentar para ejecutar*/
+
+
+//Solucion de problema 4
+//4) Programa una función que repita un texto X veces, pe. miFuncion('Hola Mundo', 3) devolverá Hola Mundo Hola Mundo Hola Mundo.
+ 
+/*Logica del algoritmo
+a) Con el metodo Repeat puedo hacer la implementacion de sta funcion facilmente, pero hay el inconveniente de que
+me regresa el texto repetido el numero de veces que quiero pero no separados
+b) Las opcion que se me han ocurrido es :
+ splitare("", (texto.lenght + 1)) y con el array q me dan como output 
+ despues joinarlos (" ") con el espacio
+c) Implementar todo en una funcion
+
+*/
+
+//La funcion que repite la string el numero de n veces se quiera
+function repetidorNVecesDeTextos (elTexto, n) {
+
+    textosMultiplesUnidos = elTexto.repeat(n);
+    /*arrayTextosMultiplesSeparados = textosMultiplesUnidos.split("", (primerTexto.length*n));
+    textosMultiplesSeparados = arrayTextosMultiplesSeparados.join("");*/
+
+    console.log(textosMultiplesUnidos);
+    /*console.log(textosMultiplesSeparados)
+    console.log(arrayTextosMultiplesSeparados);*/
+}
+
+//La frase (String), y los numeros de veces que se repetiran 
+let frase = "Hola mundo";
+let numeroDeVeces = 3;
+let numeroDeVeces2 = 0;
+let numeroDeVeces3 = 10;
+
+//La funcion ejecutada
+repetidorNVecesDeTextos(frase, numeroDeVeces);
+repetidorNVecesDeTextos(frase, numeroDeVeces2);
+repetidorNVecesDeTextos(frase, numeroDeVeces3);
+
+//NOTA: No logre loguear las frases en modo separadas, o con un caracter que las distancie 
+
+</script>
+</body>
+</html>
