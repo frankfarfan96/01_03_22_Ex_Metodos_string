@@ -163,6 +163,127 @@ repetidorNVecesDeTextos(frase, numeroDeVeces3);
 
 //NOTA: No logre loguear las frases en modo separadas, o con un caracter que las distancie 
 
+
+
+
+
+
+
+/*Ejercicios 02_03_22
+
+5) Programa una función que invierta las palabras de una cadena de texto, pe. miFuncion("Hola Mundo") devolverá "odnuM aloH".
+6) Programa una función para contar el número de veces que se repite una palabra en un texto largo, pe. miFuncion("hola mundo adios mundo", "mundo") devolverá 2.
+7) Programa una función que valide si una palabra o frase dada, es un palíndromo (que se lee igual en un sentido que en otro), pe. mifuncion("Salas") devolverá true.
+8) Programa una función que elimine cierto patrón de caracteres de un texto dado, pe. miFuncion("xyz1, xyz2, xyz3, xyz4 y xyz5", "xyz") devolverá  "1, 2, 3, 4 y 5.
+
+Nota: De ahora en adelante usare las Funciones Expresadas, pues son the best practice.
+*/
+
+//5) La logica de la funcion la encontre gracias al metodo split (viendo la doc en mdn)
+
+const invertCadena = (cadena = "") => {  
+    (!cadena) ? 
+    console.warn("Mira que no has ingresado ninguna cadena")
+    : console.info(cadena.split('').reverse().join(''))
+}
+
+invertCadena("Pop Corn");
+invertCadena("");
+
+//Nota: No logre hacer que me validara como input solo las cadenas y no los numeros
+
+
+console.clear();
+
+
+//6) Encontre la solucion en un blog de url:  https://ekiketa.es/contar-las-veces-que-aparece-un-caracter-en-un-string-de-javascript/
+//Oviamente lei la logica del metodo match RegExp, y reescribi la funcion a mano en modo expresado, no declarado
+//Vease la diferencia de las funciones que tienen hasta para ser ejecutadas, una necesita el console para ser logeada en la console, la otra no porque lo tiene dentro
+
+
+function cuantasVecesApareceUnaPalabra(cadena, palabra){
+    return cadena.match(new RegExp('(\\w*' + palabra + '\\w*)','gi')).length;
+}
+
+let vecesQueApareceEsta = cuantasVecesApareceUnaPalabra("Cuantas esta 'A' esta aparecen en esta cadena.", "esta");
+
+
+console.info(vecesQueApareceEsta);
+
+//-------------------------------------
+
+const contadorDePalabras = (cadena="", palabra="") => {
+   
+   let numeroDeAparisionPalabra = cadena.match(new RegExp('(\\w* ' + palabra +  '\\w*)', 'gi')).length;
+
+    return (numeroDeAparisionPalabra === undefined && cadena===null) ? 
+    console.warn("No has inserido la palabra"):
+    console.info(`${palabra} aparece ` +numeroDeAparisionPalabra + " veces");
+
+
+}
+
+contadorDePalabras("Hola mundo, hola a todos y todas, estas hola son mis frases improvisadas, hola", "hola");
+
+//contadorDePalabras();
+
+// Nota : No logre hacer el caso donde no se introducen datos
+
+
+
+
+
+//7) Con la ayuda de mi antigua funcion invertCadena, la modifique para crear una nueva funcion llamada palindromoDetecter
+
+const validadorDePalindromos = (palabra = "") => {
+   
+   //if (palabra.length < 1) return console.warn("No has inserido una palabra")
+
+    (palabra.toLocaleLowerCase() === palabra.toLocaleLowerCase().split('').reverse().join('')) ?
+    console.info(true + `, ${palabra} es una palabra palindroma`) 
+    : console.info(false + `, ${palabra} no es una palabra palindroma`);
+} 
+
+validadorDePalindromos("Salas");
+validadorDePalindromos("Paracutirimicolo");
+//validadorDePalindromos("")
+
+//Nota : no pude validar el caso en el que como input undefined
+
+
+
+console.clear();
+
+
+
+
+//8) Logica personal, spliteo cada elemento los vuelvo en array, dsps spliteo el filtrador3000
+//y despues resto los elementos de los 2 nuevos arrays y los pongo en un nuevo array 
+//al parecer no se puede hacer la operacion de restar entre elementos de un array, entonces puedo hacer que comparo cada nuevo 
+//elemente del arrayNoFiltrado, con el nuevo array creado del filtrador3000, y los caracteres que coinciden filtrarlos
+
+const filtadorDePatronesEnArrays = (arrayNoFiltrado, filtrador3000) => {
+    let arrayElementosNoFiltrados = arrayNoFiltrado.split('');
+    let arrayElementosFiltrador3000 = filtrador3000.split('');
+    let arrayFiltrado = []
+
+    for (let i = 0 ; i < arrayElementosNoFiltrados.length ; i++ ) {
+        for(let j=0; j < arrayElementosFiltrador3000.length ; j++) {
+        arrayFiltrado = arrayElementosNoFiltrados.filter(arrayElementosNoFiltrado => arrayElementosNoFiltrado != arrayElementosFiltrador3000[j]).join('');
+        }
+    }
+    return console.info(arrayFiltrado, arrayElementosFiltrador3000, arrayElementosNoFiltrados)
+}
+
+filtadorDePatronesEnArrays("xyz1, xyz2, xyz3, xyz4 y xyz5", "xyz");
+
+
+//Nota: No pude filtrar los patrones dentro del array solo el ultimo caracter u.u
+
+
+
+
+
 </script>
 </body>
 </html>
