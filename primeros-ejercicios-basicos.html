@@ -283,6 +283,105 @@ filtadorDePatronesEnArrays("xyz1, xyz2, xyz3, xyz4 y xyz5", "xyz");
 
 
 
+/*--------------------------------- 04_03_22 ejercicios con los metodos de los Numbers
+9) Programa una función que obtenga un numero aleatorio entre 501 y 600.
+
+10) Programa una función que reciba un número y evalúe si es capicúa o no 
+(que se lee igual en un sentido que en otro), pe. miFuncion(2002) devolverá true.
+
+11) Programa una función que calcule el factorial de un número 
+(El factorial de un entero positivo n, se define como el producto de todos los números enteros positivos desde 1 hasta n), pe. miFuncion(5) devolverá 120.
+*/
+
+
+
+//9) Trate de hacer la resolucion usando while y do while pero en los 2 casos o no botaba el numero o iva en loop infinito
+// Intuia la solucion que despues encontre en la documentacion de mdn
+
+const maquinaAleatoriaNumerica = (numero = NaN) => {
+  numero = Math.round(Math.random()*(600 - 500) + 500);
+    return console.info(numero)
+} 
+
+maquinaAleatoriaNumerica()
+
+
+console.clear();
+
+
+
+
+
+//10) Despues de varios ejercicios empiezo a interiorizar la logica
+
+const capicuaDetector = (numero = NaN) => {
+    numeroString = numero.toString().split("").reverse().join("");
+    if(!numero) return console.warn("No has inserido el numero");
+    return (numeroString == numero) ? console.info("El numero es capicua") :
+    console.info("No es un numero capicua");
+}
+
+capicuaDetector();
+capicuaDetector(88);
+capicuaDetector(100);
+
+
+console.clear();
+
+
+
+
+
+
+//11) Mi logica fue, primero conseguir en un array, la lista de todos los numeros 0 < numerosArray < numeroDeFacorializar
+// (Lo quize hacer con el operador if, pero no me salvava los elementos correctos en el array de los factoriales, me daba todos igual a (numDeFactorializar - 1)
+// Despues me di cuenta que el mejor operador era el do while (dentro un for obiamente para pushar cada elemento) e 
+//Segundo, implemente todo con otro operador "for" que me daba el resultado de la multiplicacion de los elementos dentro ese array de numeros factoriales
+//Tercero, implemente en el caso que como input hubiera el valor "0" o FALSE
+
+
+const factorialMachine = (numero = NaN) => {
+   
+   let arrayFactoriales = []
+   let resultado = 1;
+   let paraConseguiUltimoResultado = numero; 
+
+   if(!numero) return console.warn("No has inserido un numero correcto");
+
+   for (let i=0; i < numero ; i++) {
+  /* if (numero > 0) { 
+   numeriFactoriali = numero - 1;
+   if(numeriFactoriali < numero){
+   numeroGuardado = numeriFactoriali
+   }
+   arrayFactoriales.push(numeroGuardado)
+   }*/
+
+   do {
+   numero = numero - 1;
+   //numeroGuardado = numeriFactoriali
+   arrayFactoriales.push(numero)
+    } while (numero > 1);
+   }
+
+   for (let i = 0; i < arrayFactoriales.length ; i++) {
+    if (arrayFactoriales[i]!=0) {
+        resultado = resultado * arrayFactoriales[i];
+    }
+    if(resultado < resultado*resultado) {
+        totalResultado = resultado*paraConseguiUltimoResultado;
+    }
+   }
+   return console.info(arrayFactoriales, totalResultado)
+}
+
+factorialMachine(8);
+factorialMachine(5);
+factorialMachine(0);
+
+
+
+
 
 </script>
 </body>
