@@ -383,6 +383,96 @@ factorialMachine(0);
 
 
 
+/* Ejercicios resueltos 05_03_22
+
+12) Programa una función que determine si un número es primo (aquel que solo es divisible por sí mismo y 1) o no, pe. miFuncion(7) devolverá true.
+13) Programa una función que determine si un número es par o impar, pe. miFuncion(29) devolverá Impar.
+14) Programa una función para convertir grados Celsius a Fahrenheit y viceversa, pe. miFuncion(0,"C") devolverá 32°F.
+
+*/
+
+
+
+
+
+//12) 
+const primoDetecter = (numero = NaN) => {
+    arrayNumeros = [];
+    numeroVerificador = 0;
+    
+    if(numero ===1 ) return console.warn("El numero 1 no es considerado primo ")
+    if(!numero) return console.warn("No has inserido un numero");
+    if (typeof numero !== "number") return console.error(`${numero} no es un numero`);
+
+    for (let i = numero-1; i > 1 ; i--) {
+        restoDetector = numero % i; // para ver si es divisible
+        arrayNumeros.push(restoDetector)
+        
+        if (restoDetector===0) numeroVerificador++;
+    }
+    
+    return (numeroVerificador!=0) ?
+    console.info(false, `El numero ${numero} no es primo` ) :
+    console.info(true,  `El numero ${numero} es primo` );
+}
+
+primoDetecter(13);
+primoDetecter(4);
+primoDetecter(1);
+primoDetecter();
+primoDetecter("a");
+
+
+console.clear()
+ 
+
+ 
+
+//13) 
+
+const parImparDector = (numero=NaN) => (numero%2!=0)? console.info(`El numero ${numero} es impar`) : console.info(`El numero ${numero} es par`)
+
+parImparDector(2);
+parImparDector(5);
+
+
+console.clear();
+
+
+
+
+//14) 
+//(x °C × 9 / 5) + 32 = y °F
+//(y °F − 32) × 5 / 9 = x °C
+
+const convertidorDeGrados = (numero, grados) => {
+    if (typeof numero !== "number") return console.error(`${numero} no es un numero`);
+
+    if (grados.toUpperCase() === "C") {
+        numeroF = (numero * 9) / 5 + 32
+        return console.info(numeroF.toFixed(2), "°F")
+    }
+    else if (grados.toUpperCase() === "F") {
+        numeroC = ((numero - 32) * 5) / 9   
+        return console.info(numeroC.toFixed(2), "°C")
+    }
+    else return console.warn("No has inserido una medida de grados correcta ")
+}
+
+convertidorDeGrados(10, "C");
+convertidorDeGrados(0, "C");
+convertidorDeGrados(35, "F");
+convertidorDeGrados(32, "f");
+convertidorDeGrados(9, "fifa")
+convertidorDeGrados("", "f");
+
+
+
+
+
+
+
+
 </script>
 </body>
 </html>
