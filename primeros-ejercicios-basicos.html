@@ -468,6 +468,117 @@ convertidorDeGrados("", "f");
 
 
 
+/*  Resueltos 07_03_22, 2 ejercicios con numeros y uno con Date
+
+15) Programa una función para convertir números de base binaria a decimal y viceversa, pe. miFuncion(100,2) devolverá 4 base 10.
+16) Programa una función que devuelva el monto final después de aplicar un descuento a una cantidad dada, pe. miFuncion(1000, 20) devolverá 800.
+17) Programa una función que dada una fecha válida determine cuantos años han pasado hasta el día de hoy, pe. miFuncion(new Date(1984,4,23)) devolverá 35 años (en 2020).
+
+*/
+
+//15) ejem : 1010 
+// (0 x 2^0)+ (1 x 2^1) + (0 x 2^2) + (1 x 2^3) = 10
+//numeroString = numero.toString().split("");
+
+// numeroString[i] * (Math.pow(2,  (numeroString[i]-i)))
+//Estoy usando tanto ingenieria inversa
+const convertidorDeCodifica = (numero, base) => {
+    if (numero === undefined) return console.warn("No ingresaste el numero a convertir");
+
+    if (typeof numero !== "number") return console.error(`El numero "${numero}" ingresado, NO es un numero`);
+
+    //En un primer momento quize convertir el numero binario en una string, con los num. invertidos (porque haci se hacia mas
+    //facil al aplicar la formula de la convercion de la base 2 a la base 10) y despues convertir ese nuevo array de string en
+    //un array de numeros para poder aplicar la formula, pero me di cuenta que el metodo parseInt(a, b); hace ya la conversion jeje.
+    
+    /*
+        const array = [0, 1, 0, 1];
+        let sum = 0;
+        let numeroBaseDiez = 0;
+          
+        if (base === 2) {
+        numeroString = numero.toString().split("").reverse();
+        for (let i = 0; i < array.length; i++) {
+        sum += array[i] * (Math.pow(2, i));
+        }
+        }
+    */
+        if (base === 2) {
+            numeroBaseDieci = parseInt(numero, 2);
+            return console.info(`El valor ${numero} base 2, se vuelve ${numeroBaseDieci} en base 10`);
+        }
+
+        else if (base === 10) {
+            /*Estaba queriendolo hacer a mi modo, pero despues me documente y vi que hay metodo que
+            lo hace directamente sin complicarse tanto jeje.
+            let residuo=0;
+            let arrayNumeros = [];
+            while(residuo !== 1){
+                newNum = numero/2;
+                if(newNum!=0 && newNum!=1){
+                    break;
+                } 
+                //arrayNumeros.push(residuo);
+                console.info(arrayNumeros, numero/2)
+            };
+            */ 
+            let binario = numero.toString(2);
+            return console.info(`El numero ${numero} base 10, se vuelve ${binario} en base 2`)
+        } else {
+            console.warn("No has inserido una base entre 2 o 10");
+        }
+
+    }
+
+    //convertidorDeCodifica(101010100111, 2);
+    //convertidorDeCodifica(25, 10);
+    //convertidorDeCodifica(96, 5);
+    //convertidorDeCodifica("2003", 10);
+    //convertidorDeCodifica(25, "abc");
+
+
+
+
+
+
+    
+//16)
+const descuentos =  (numero, descuento) => {
+    if (numero === undefined) return console.warn("No ingresaste el numero a convertir");
+
+    if (typeof numero !== "number") return console.error(`El numero "${numero}" ingresado, NO es un numero`);
+
+    if (descuento === undefined) return console.warn("No ingresaste el descuento");
+
+    if (typeof descuento !== "number") return console.error(`El descuento "${descuento}" ingresado, NO es un numero`);
+
+
+    numeroDescuento = numero*((descuento)/100);
+    resultado = numero - numeroDescuento;
+    return console.info(`El ${descuento} porciento de ${numero} es igual a ${resultado}`);
+}
+
+//descuentos(100, 20);
+//descuentos(50, 50);
+//descuentos(50);
+//descuentos();
+
+
+
+
+
+
+//17) 
+const contadorDeAnios = (fecha) => {
+    let fecha2 = new Date();
+    let fecha3 = fecha2 - fecha;
+    console.info(`Han pasado ${Math.floor(fecha3*(3.2*Math.pow(10, -11)))} anios`);
+}
+
+contadorDeAnios(new Date(1984, 4, 23));
+
+
+
 
 
 
