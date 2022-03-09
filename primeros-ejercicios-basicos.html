@@ -580,6 +580,116 @@ contadorDeAnios(new Date(1984, 4, 23));
 
 
 
+/*Ejercicios 09_03_22
+
+18) Programa una función que dada una cadena de texto cuente el número de vocales y consonantes, pe. miFuncion("Hola Mundo") devuelva Vocales: 4, Consonantes: 5.
+19) Programa una función que valide que un texto sea un nombre válido, pe. miFuncion("Jonathan MirCha") devolverá verdadero.
+20) Programa una función que valide que un texto sea un email válido, pe. miFuncion("jonmircha@gmail.com") devolverá verdadero.
+
+*/
+
+//18)
+const contadorVocalesConstastes = (texto = "") =>{
+    if (typeof texto == "number" || typeof texto == "object") return console.error(`El valor ${texto}, no es un texto string`)
+    if (texto.length === 0) return console.warn("Tienes que inserir un texto")
+    let myReVoc = /(a|e|i|o|u)/gi;
+    let myRe = /[a-z]/gi;
+    let myArrayVoc = texto.match(myReVoc);
+    let myArrayLetr = texto.match(myRe);
+    if (myArrayLetr === null  && (myArrayVoc === null)) return console.warn("Tienes que inserir un texto")
+    
+    return console.info(`El texto inserido tiene ${myArrayVoc.length} vocales, ${(myArrayLetr.length - myArrayVoc.length)} consonantes`);
+}
+
+//contadorVocalesConstastes("Hola 8 mundos");
+//contadorVocalesConstastes("Uno cero uno uno uno cero uno cero cero cero uno");
+//contadorVocalesConstastes("Trrrrrrrrrres felicesss tigrrrrrres 369369");
+//contadorVocalesConstastes("");
+//contadorVocalesConstastes("  ");
+//contadorVocalesConstastes("369a");
+//contadorVocalesConstastes(33);
+//contadorVocalesConstastes([]);
+
+
+
+
+
+//19) Para que se considere un nombre, tiene que tener (en este ejemplo mio) solo 2 palabras de solo letras (no numeros)
+//las cuales tienen que empezar x mayuscula las dos, y un espacio entre ellas
+//Al ultimo se me ocurrio implementar el caso que los nombres y apellidos no pueden ser mas cortos de 3 digitos
+//Y despues de esa ultima implementacion se me ocurrio, que los nombres y apellidos tienen que tener almenos una vocal
+
+const verificadorDeNombre = (nombre = "") =>{
+    if (nombre.length === 0) return console.warn("No has inserido los datos correctamente")
+    if (typeof nombre == "number" || typeof nombre == "object") return console.error(`El valor ${nombre}, no es una string`)
+
+    nombreYApellido = nombre.split(" "), //Con el Split me aseguro que las 2 palabras sean mayuscula
+    myReNum = /[0-9]/g, //Controlo que no hayan numeros entre las palabras
+    myRe = /^[A-Z]/g //con esto controlo que las palabras empiezen en mayuscula
+    myReLargo = /\w{3,10}/g //Con esto controlo que los nombres y apellidos no sean mas cortos de 3 letras ni mas largos de 10 letras
+    myReVocale = /(a|e|i|o|u)/g // Constatador de vocal
+
+    if(nombreYApellido.length===2){
+        myArrayNoNum = nombre.match(myReNum),
+
+        myArrayNombre = nombreYApellido[0].match(myRe),
+        myArrayApellido = nombreYApellido[1].match(myRe),
+        
+        nombreLargeza = nombreYApellido[0].match(myReLargo),
+        apellidoLargeza = nombreYApellido[1].match(myReLargo),
+
+        nombreVocales = nombreYApellido[0].match(myReVocale),
+        apellidoVocales = nombreYApellido[1].match(myReVocale);
+        
+        return (myArrayNoNum !== null) ?
+        console.error("No puedes poner un numero en tu nombre") :
+        ((apellidoLargeza && nombreLargeza) === null) ?
+        console.error("No puedes poner un nombre o apellido mas corto de 3 letras ni mas largo de 10") :
+        ((nombreVocales && apellidoVocales) === null) ?
+        console.error("No existen nombres o apellidos sin vocales") : 
+        ((myArrayApellido && myArrayNombre) !== null) ?
+        console.info(`El nombre ${nombre} es un bonito nombre`) :
+        console.warn("Tu nombre y apellido tienen que empezar por mayuscula")        
+    } else return console.warn("Tienes que poner 1 nombre y 1 apellido que empiezen en mayusculas")
+}
+
+//verificadorDeNombre("Frank Farfan");
+//verificadorDeNombre("Frank Farfan el Mas Duro");
+//verificadorDeNombre("");
+//verificadorDeNombre({});
+//verificadorDeNombre(33);
+//verificadorDeNombre("33 3");
+//verificadorDeNombre("Frank Farfan96");
+//verificadorDeNombre("3")
+//verificadorDeNombre("Frank");
+//verificadorDeNombre("Fr Farfan");
+//verificadorDeNombre("Frank Fn");
+//verificadorDeNombre("Frnk Farfan");
+//verificadorDeNombre("Frank Frfn");
+
+
+
+
+
+//20)
+const validadorMail = (mail = "") => {
+    
+    myReMail = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,4}$/i,
+    resultado = myReMail.test(mail);
+
+    return (!resultado) ?
+    console.info(`Mail "${mail}" NO valida`) :
+    console.info(`Mail "${mail}" valida`);
+}
+
+validadorMail("frankfarfan96@gmail.com");
+validadorMail("topolinoino@boo,it");
+validadorMail("topolinoinoboo.it");
+validadorMail("reymisterio369@boo.ita");
+validadorMail("96");
+validadorMail("");
+
+
 
 
 
