@@ -784,6 +784,85 @@ const numerosParesImpares = (numeros=[]) => {
 
 
 
+/* 16_03_22 3 ejercicios arrays y numeros
+24) Programa una función que dado un arreglo de números devuelva un objeto con dos arreglos, el primero tendrá los numeros ordenados en forma ascendente y el segundo de forma descendiente, pe. miFuncion([7, 5,7,8,6]) devolverá { asc: [5,6,7,7,8], desc: [8,7,7,6,5] }.
+25) Programa una función que dado un arreglo de elementos, elimine los duplicados, pe. miFuncion(["x", 10, "x", 2, "10", 10, true, true]) devolverá ["x", 10, 2, "10", true].
+26) Programa una función que dado un arreglo de números obtenga el promedio, pe. promedio([9,8,7,6,5,4,3,2,1,0]) devolverá 4.5.
+*/
+
+
+
+//24)
+const ordenarAscendenteDescendiente = (arr = undefined) => {
+    if (arr === undefined) return console.warn("No ingresaste un array de numeros");
+    if(!(arr instanceof Array)) return console.error("El valor que ingresate no es un arreglo");
+    if(arr.length === 0 ) return console.error("El arrey esta vacio");
+
+    for(let num of arr) {
+        if(typeof num !== "number") return console.warn(`El valor ${num}, NO es un numero`)
+    }
+    arrAsc = arr.sort((a,b)=>a-b);
+    const newArr = arrAsc.map(el => el); //practicamente duplique el array en este modo
+
+    return console.info({
+    ascendente : arrAsc,
+    descendiente : newArr.reverse()
+})
+}
+
+
+//ordenarAscendenteDescendiente();
+//ordenarAscendenteDescendiente([]);
+//ordenarAscendenteDescendiente([1,2,4,3,true,9]);
+//ordenarAscendenteDescendiente([1,5,8,3,9,0,2,10])
+
+
+
+
+
+//25)
+const elimiarDuplicados = (arr = undefined) => {
+    if (arr === undefined) return console.warn("No ingresaste un array de numeros");
+    if(!(arr instanceof Array)) return console.error("El valor que ingresate no es un arreglo");
+    if(arr.length === 0 ) return console.error("El arrey esta vacio");
+
+    const arrNoDup = arr.filter((el, index) => arr.indexOf(el) === index);
+
+    console.info(arrNoDup)
+}
+
+//elimiarDuplicados(["x", 10, "x", 2, "10", 10, true, true])
+
+
+
+
+
+
+//26)Programa una función que dado un arreglo de números obtenga el promedio, pe. promedio([9,8,7,6,5,4,3,2,1,0]) devolverá 4.5.
+const promedioDeArray = (arr = undefined) => {
+    if (arr === undefined) return console.warn("No ingresaste un array de numeros");
+    if(!(arr instanceof Array)) return console.error("El valor que ingresate no es un arreglo");
+    if(arr.length === 0 ) return console.error("El arrey esta vacio");
+
+    for(let num of arr) {
+        if(typeof num !== "number") return console.warn(`El valor ${num}, NO es un numero`)
+    }
+    
+    sum = 0;
+
+    for(let i = 0; i < arr.length; i++) {
+        sum = sum + arr[i] 
+    }
+
+    return console.info(sum/arr.length)
+}
+
+promedioDeArray([1,2,3])
+
+
+
+
+
 </script>
 </body>
 </html>
