@@ -861,6 +861,103 @@ promedioDeArray([1,2,3])
 
 
 
+/*18_03_22 ultimo ejercicio de esta serie, uno de clases
+27) Programa una clase llamada Pelicula.
+
+La clase recibirá un objeto al momento de instanciarse con los siguentes datos: id de la película en IMDB, 
+titulo, director, año de estreno, país o países de origen, géneros y calificación en IMBD.
+
+          Todos los datos del objeto son obligatorios.
+          Valida que el id IMDB tenga 9 caracteres, los primeros 2 sean letras y los 
+          7 restantes números.
+          Valida que el título no rebase los 100 caracteres.
+          Valida que el director no rebase los 50 caracteres.
+          Valida que el año de estreno sea un número entero de 4 dígitos.
+          Valida que el país o paises sea introducidos en forma de arreglo.
+          Valida que los géneros sean introducidos en forma de arreglo.
+          Valida que los géneros introducidos esten dentro de los géneros 
+          aceptados*.
+     - Valida que la calificación sea un número entre 0 y 10 pudiendo ser 
+     decimal de una posición.
+         Crea un método estático que devuelva los géneros aceptados*.
+         Crea un método que devuelva toda la ficha técnica de la película.  
+    - Apartir de un arreglo con la información de 3 películas genera 3 
+    instancias de la clase de forma automatizada e imprime la ficha técnica 
+    de cada película.
+
+ Géneros Aceptados: Action, Adult, Adventure, Animation,
+Biography, Comedy, Crime, Documentary ,Drama, Family, 
+Fantasy, Film Noir, Game-Show, History, Horror, Musical, Music, Mystery, News, Reality-TV,
+ Romance, Sci-Fi, Short, Sport, Talk-Show, Thriller, War, Western.
+*/
+
+//27)
+class Pelicula {
+    constructor(id, titulo, director, year, pais, genero, clasificacion){
+        
+        let expRegId = /(^([0-9]){2}([a-zA-Z]){7}$)/gi.test(id); 
+        let expRegTit = /^[a-z .A-Z0-9]{2,100}$/i.test(titulo); 
+        let expRegDire = /^[a-z A-Z]{3,50}$/i.test(director); 
+        let expRegYear = /^(\d{4})$/i.test(year);
+        let expRegClasi = /^[0-9]{1,2}([(.\d)]{2})?$/i.test(clasificacion); 
+
+        const generosAceptados = ["Action", "Adult", "Adventure", "Animation",
+            "Biography", "Comedy", "Crime", "Documentary" ,"Drama", "Family", 
+            "Fantasy", "Film Noir", "Game-Show", "History", "Horror", "Musical", "Music", "Mystery", "News", "Reality-TV",
+            "Romance", "Sci-Fi", "Short", "Sport", "Talk-Show", "Thriller", "War", "Western"]
+        
+        let boleano = false;    
+            for(let i=0;i<generosAceptados.length;i++){
+            let element = generosAceptados[i]
+                if(genero.includes(element)){
+                    boleano = true;
+                }
+            }
+
+        if (expRegId) return (
+        !expRegTit? console.warn("El titulo no fue inserido correctamente (Min 2 letras, Max 100)") :
+        !expRegDire?  console.warn("El nombre del director no fue inserido correctamente (Min 3 letras, Max 50)") : 
+        !expRegYear?  console.warn("El anio no fue inserido correctamente") : 
+        (!(pais instanceof Array))?  console.warn("El formato pais/paises, no fue/fueron inseridos correctamente(Tiene que ser un array)") : 
+        (pais.length === 0)?  console.warn("Tiene que tener almenos un pais") : 
+        (!(genero instanceof Array))?  console.warn("El formato genero, no fue inserido correctamente(Tiene que ser un array)") : 
+        (genero.length === 0)?  console.warn("Tiene que tener almenos un genero") : 
+        (!boleano)?  console.warn("No concidieron con los generos aceptados") :    
+        !expRegClasi?  console.warn("El numero de clasifica no fue inserido correctamente (entre 0 al 10, con max un numero decimal)") : 
+        (this.id = id) && (this.titulo = titulo) && (this.director = director) && (this.year = year) && (this.pais = pais) 
+        && (this.genero = genero) && (this.clasificacion = clasificacion)
+        ) 
+        else return console.warn("No has inserido correctamente el ID (2 numero + 7 letras)")
+    }
+
+
+    losGenerosAceptados (){
+    console.info("Géneros Aceptados: Action, Adult, Adventure, Animation, Biography, Comedy, Crime, Documentary ,Drama, Family, Fantasy, Film Noir, Game-Show, History, Horror, Musical, Music, Mystery, News, Reality-TV, Romance, Sci-Fi, Short, Sport, Talk-Show, Thriller, War, Western.");
+    }
+
+    fichaTecnica (){
+     console.info(`
+     El nombre de esta pelicula es "${this.titulo}" y su directore es "${this.director}".\n
+     Fue lanzada en el anio ${this.year}. Su genero es ${this.genero} y se realizo en ${this.pais}
+     `)
+    }
+}
+
+const matrix0 = new Pelicula("45DoTRapa","Matrix 0.0","Frank Farfenix", 2003, ["Peru", "Italia"], ["Action", "Short"], 4.5);
+const matrix1 = new Pelicula("45Dpa","Matrix 0.1","Frank Farfenix", 2004, ["Peru", "Italia"], ["Action", "Short"], 4.5);
+const matrix2 = new Pelicula("DoTRapa","Matrix 0.2","Frank Farfenix", 2005, ["Peru", "Italia"], ["Action", "Short"], 4.5);
+const matrix3 = new Pelicula("45DoTRapa","M","Frank Farfenix", 2006, ["Peru", "Italia"], ["Action", "Short"], 4.5);
+const matrix4 = new Pelicula("45DoTRapa","Matrix 0.4","FF", 2007, ["Peru", "Italia"], ["Action", "Short"], 4.5);
+const matrix5 = new Pelicula("45DoTRapa","Matrix 0.5","Frank Farfenix", 20008, ["Peru", "Italia"], ["Action", "Short"], 4.5);
+const matrix6 = new Pelicula("45DoTRapa","Matrix 0.6","Frank Farfenix", 2009, [], ["Action", "Short"], 4.5);
+const matrix7 = new Pelicula("45DoTRapa","Matrix 0.7","Frank Farfenix", 2009, "Italia", ["Action", "Short"], 4.5);
+const matrix8 = new Pelicula("45DoTRapa","Matrix 0.8","Frank Farfenix", 2010, ["Peru", "Italia"], [], 4.5);
+const matrix9 = new Pelicula("45DoTRapa","Matrix 0.9","Frank Farfenix", 2010, ["Peru", "Italia"], [55], 4.5);
+const matrix10 = new Pelicula("45DoTRapa","Matrix 0.101","Frank Farfenix", 2010, ["Peru", "Italia"], ["Action", "Short"], 8.555);
+console.info(matrix0);
+matrix0.losGenerosAceptados();
+matrix0.fichaTecnica();
+
 
 
 </script>
